@@ -99,16 +99,30 @@
         .card-gradient {
             background-image: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%);
         }
+
+        /* Adiciona um efeito de parallax e cor escura na seção de contato */
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .dark-overlay {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
     </style>
 </head>
 <body class="bg-white">
 
+    <!-- Navbar -->
     <nav x-data="{ open: false, isSticky: false }" class="fixed w-full z-50 transition-all duration-300 ease-in-out"
         @scroll.window="isSticky = (window.pageYOffset > 50)">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center transition-all duration-300"
             :class="{ 'bg-white shadow-lg': isSticky, 'bg-transparent': !isSticky }">
-            <a href="#home" class="text-xl font-bold text-gray-800 transition-colors duration-300" :class="{ 'text-primary-dark': isSticky }">
-                Ei, Vanderray
+            <!-- Logo no topo -->
+            <a href="#home" class="transition-colors duration-300">
+                <img src="https://placehold.co/150x50/F97316/ffffff?text=LOGO+TOPO" alt="Logo Vanderray" class="h-8 md:h-10">
             </a>
             <div class="md:hidden">
                 <button @click="open = !open" type="button" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600">
@@ -211,7 +225,7 @@
                         <p class="text-gray-600 mb-6 leading-relaxed">
                             Nossa equipe está sempre nas ruas, ouvindo a comunidade e fiscalizando as demandas para que sejam resolvidas.
                         </p>
-                        <a href="#" class="text-primary hover:text-primary-dark font-semibold transition hover:underline">Saiba mais</a>
+                        <a href="#" class="text-primary hover:underline font-semibold mt-4 block">Saiba mais</a>
                     </div>
                 </div>
                 <div class="text-center mt-16 animate-fade-in" style="animation-delay: 0.8s">
@@ -295,10 +309,12 @@
             </div>
         </section>
 
-        <section id="contact" class="bg-white py-20 px-6 hidden-section">
-            <div class="container mx-auto">
-                <h2 class="section-title text-3xl font-bold text-center mx-auto">Canal Direto</h2>
-                <p class="text-center text-gray-700 mb-12 max-w-2xl mx-auto">
+        <!-- Seção de Contato com Imagem de Fundo -->
+        <section id="contact" class="relative py-20 px-6 hidden-section parallax-bg" style="background-image: url('https://placehold.co/1200x800/F97316/ffffff?text=Fundo+Laranja');">
+            <div class="absolute inset-0 dark-overlay"></div>
+            <div class="container mx-auto relative z-10">
+                <h2 class="section-title text-3xl font-bold text-center mx-auto text-white">Canal Direto</h2>
+                <p class="text-center text-gray-200 mb-12 max-w-2xl mx-auto">
                     Sua voz é o nosso guia. Use o formulário abaixo para enviar sua demanda, sugestão ou feedback. Estamos prontos para te ouvir!
                 </p>
                 <div class="flex flex-col md:flex-row md:space-x-12">
@@ -332,7 +348,7 @@
 
                     <div class="w-full md:w-1/2 space-y-12 animate-fade-in-up" style="animation-delay: 0.3s">
                         <div>
-                            <h3 class="text-2xl font-bold mb-4">Conecte-se conosco!</h3>
+                            <h3 class="text-2xl font-bold mb-4 text-white">Conecte-se conosco!</h3>
                             <div class="flex flex-wrap gap-4">
                                 <a href="https://wa.me/5591900000000" target="_blank" class="flex items-center space-x-2 bg-green-500 text-white px-5 py-2 rounded-full font-semibold hover:bg-green-600 transition-colors transform hover:scale-105">
                                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2C6.54 2 2 6.54 2 12.04c0 1.79.48 3.5.34 4.79l-1.38 5.09c-.06.2.03.42.22.51.19.09.4.04.53-.1l4.98-3.04c1.2.3 2.47.45 3.77.45 5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2zm2.06 13.93c-.15.25-.92.2-.92.2s-.75-.38-.98-.67c-.24-.31-.25-.32-.44-.32-.2 0-.4-.1-.58-.1-.18 0-.32.09-.4.2-.08.11-.26.29-.44.5-.18.21-.36.21-.55.1s-.41-.18-.8-.48c-.4-.3-.8-.74-1.12-1.15-.32-.43-.72-.94-1.02-1.46-.3-.52-.61-1.07-.44-1.23.18-.17.38-.28.49-.4s.22-.32.3-.47c.09-.15.09-.28 0-.42-.08-.14-.4-.36-.57-.55-.17-.19-.3-.21-.4-.2-.1 0-.2.02-.33.06-.12.04-.26.1-.4.21-.14.12-.27.28-.42.44-.15.15-.28.27-.4.36-.12.09-.23.1-.35.12-.11.02-.2-.01-.32-.07-.12-.05-.28-.15-.43-.3-.15-.14-.29-.27-.4-.41-.12-.15-.1-.28-.02-.4-.06-.18.1-1.68.14-1.77.04-.09.34-.3.44-.38.1-.08.2-.14.3-.2-.06-.05-.14-.14-.14-.23-.08-.09-.22-.26-.35-.4s-.17-.2-.26-.3c-.09-.1-.18-.2-.25-.32-.08-.12-.13-.24-.13-.37-.01-.13.06-.27.14-.4s.19-.24.3-.34c.1-.1.21-.19.33-.25.13-.06.2-.07.31-.07h.45c.18 0 .42.06.63.15.21.09.39.21.57.34.18.14.36.29.5.42.15.14.28.26.4.37.11.12.23.23.32.32.09.09.2.14.32.14.12 0 .22-.05.31-.14.1-.09.2-.21.28-.31.08-.1.14-.19.2-.29.05-.1.1-.19.14-.27.05-.08.08-.15.09-.24.01-.08-.02-.17-.05-.25-.03-.08-.06-.16-.08-.24-.02-.08-.03-.17-.03-.26 0-.17.06-.32.14-.42.08-.1.17-.15.26-.18s.22-.04.35-.04c.12 0 .28.02.43.07.15.05.3.1.43.16.14.07.27.15.39.23.12.08.25.17.38.25.13.08.26.16.39.24.13.08.26.15.39.21.13.07.25.12.36.17.1.04.18.06.26.06h.04c.13 0 .24-.04.34-.13.1-.1.2-.22.28-.35.08-.13.13-.27.13-.42 0-.15-.05-.3-.13-.44-.08-.14-.2-.27-.35-.4-.15-.14-.3-.26-.45-.37-.15-.11-.3-.2-.45-.28-.15-.09-.29-.14-.42-.14-.13 0-.25.04-.37.12-.12.08-.2.18-.28.3-.08.12-.13.26-.13.43 0 .15.05.3.14.45.09.15.22.28.36.4.14.12.29.23.44.33.15.1.3.18.45.24.15.07.3.1.45.1.16-.01.32-.05.45-.14.13-.09.25-.21.36-.36.11-.15.2-.33.26-.54.06-.2.1-.42.1-.64 0-.4-.1-.7-.3-.89-.2-.2-.5-.3-.9-.3h-.02c-.39 0-.74.14-1.04.42-.3.28-.52.62-.68 1.02-.16.4-.24.84-.24 1.29 0 .44.08.88.24 1.28.16.4.38.74.68 1.02.3.28.65.42 1.04.42.39 0 .74-.14 1.04-.42.3-.28.52-.62.68-1.02.16-.4.24-.84.24-1.28 0-.39-.08-.74-.24-1.04-.16-.3-.38-.52-.68-.68-.3-.16-.65-.24-1.04-.24z"></path></svg>
@@ -349,7 +365,7 @@
                             </div>
                         </div>
                         <div>
-                            <h3 class="text-2xl font-bold mb-4">Mapa de Atuação</h3>
+                            <h3 class="text-2xl font-bold mb-4 text-white">Mapa de Atuação</h3>
                             <div class="relative w-full aspect-w-16 aspect-h-9">
                                 <img src="https://placehold.co/600x350/F3F4F6/111827?text=Mapa+de+Ananindeua" alt="Mapa de atuação em Ananindeua" class="rounded-lg shadow-md w-full h-auto">
                             </div>
@@ -360,8 +376,11 @@
         </section>
     </main>
 
+    <!-- Footer -->
     <footer class="bg-black text-gray-300 py-12 px-6">
         <div class="container mx-auto text-center md:flex md:justify-between md:items-center">
+            <!-- Logo no rodapé -->
+            <img src="https://placehold.co/120x40/F97316/ffffff?text=LOGO+RODAPE" alt="Logo do rodapé" class="h-8 md:h-10 mx-auto md:mx-0 mb-4 md:mb-0">
             <p class="text-sm">&copy; 2025 Vanderray. Todos os direitos reservados.</p>
             <div class="flex justify-center md:justify-end space-x-6 mt-6 md:mt-0">
                 <a href="#about" class="hover:text-primary transition font-medium">Sobre</a>
