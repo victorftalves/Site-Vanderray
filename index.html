@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ei, Vanderray!</title>
-    <!-- Google Fonts - Poppins & Montserrat -->
+    <title>Vanderray | A voz do povo de Ananindeua</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS CDN -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
     <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
         :root {
             scroll-behavior: smooth;
@@ -21,35 +24,31 @@
             position: relative;
         }
 
-        /* Subtle grain/noise texture overlay */
-        body::before {
+        /* Textura sutil e elegante: pontilhada */
+        .texture-pattern::before {
             content: '';
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
-            background-image: url('data:image/svg+xml;utf8,<svg width="4" height="4" viewBox="0 0 4 4" xmlns="http://www.w3.org/2000/svg"><g fill="%23111827" fill-opacity=".04"><rect x="0" y="0" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/></g></svg>');
-            opacity: 0.8;
-            z-index: -1;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Cpath fill='%23111827' d='M0 0h1v1H0zm2 2h1v1H2z' fill-opacity='.05'/%3E%3C/svg%3E");
         }
 
         /* Custom Colors for Tailwind */
         .bg-primary { background-color: #F97316; }
-        .bg-secondary { background-color: #EA580C; }
-        .text-primary { color: #F97316; }
-        .text-secondary { color: #EA580C; }
+        .bg-primary-dark { background-color: #EA580C; }
         .bg-gray-soft { background-color: #F3F4F6; }
+        .text-primary { color: #F97316; }
+        .text-primary-dark { color: #EA580C; }
 
-        .bubble {
-            content: "💬";
-            margin-right: 0.5rem;
-        }
-
+        /* Estilo para títulos de seção */
         .section-title {
             position: relative;
-            padding-bottom: 0.75rem;
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            display: inline-block;
         }
         .section-title::after {
             content: '';
@@ -63,305 +62,248 @@
             border-radius: 9999px;
         }
 
-        /* Custom animations */
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .animate-fadeInDown {
-            animation: fadeInDown 1s ease-out forwards;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .animate-fadeInUp {
+        /* Animações aprimoradas */
+        .animate-fade-in-up {
             animation: fadeInUp 1s ease-out forwards;
         }
-        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 1.2s ease-out forwards;
+        }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-        .animate-fadeIn {
-            animation: fadeIn 1s ease-out forwards;
-        }
 
         /* Card animation on hover */
         .card-hover:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        /* Navigation menu animation */
-        #nav-menu {
-            transform-origin: top;
-            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-        }
-        #nav-menu.hidden {
-            transform: scaleY(0);
-            opacity: 0;
-        }
-        #nav-menu.flex {
-            transform: scaleY(1);
-            opacity: 1;
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
         }
 
         /* Smooth scroll for sections */
         .hidden-section {
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(30px);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
         .visible-section {
             opacity: 1;
             transform: translateY(0);
         }
-        
-        /* Aspect ratio utility for Instagram grid */
-        .aspect-w-1 { padding-top: 100%; position: relative; }
-        .aspect-h-1 { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
+        /* Efeito de gradiente em cards para profundidade */
+        .card-gradient {
+            background-image: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%);
+        }
     </style>
 </head>
 <body class="bg-white">
 
-   <!-- Navbar refinada -->
-<nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500 bg-transparent">
-  <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-    <a href="#home" class="text-2xl font-extrabold text-white tracking-tight">Ei, Vanderray!</a>
-    <div class="hidden md:flex space-x-8">
-      <a href="#about" class="text-white hover:text-primary transition">Quem é Vanderray</a>
-      <a href="#projects" class="text-white hover:text-primary transition">Projetos</a>
-      <a href="#contact" class="text-white hover:text-primary transition">Contato</a>
-      <a href="#gallery" class="px-6 py-2 bg-primary text-white rounded-full font-semibold shadow-md hover:bg-secondary transition">Envie sua demanda!</a>
-    </div>
-  </div>
-</nav>
-
-<script>
-  // Mudar navbar no scroll
-  window.addEventListener("scroll", () => {
-    const nav = document.getElementById("navbar");
-    if (window.scrollY > 50) {
-      nav.classList.add("bg-white/90", "backdrop-blur-md", "shadow-lg");
-      nav.classList.remove("bg-transparent");
-      [...nav.querySelectorAll("a")].forEach(link => link.classList.add("text-gray-800"));
-    } else {
-      nav.classList.add("bg-transparent");
-      nav.classList.remove("bg-white/90", "backdrop-blur-md", "shadow-lg");
-      [...nav.querySelectorAll("a")].forEach(link => link.classList.remove("text-gray-800"));
-    }
-  });
-</script>
-
-<!-- Hero Section Premium -->
-<section id="home" class="relative w-full h-screen flex items-center justify-center text-center px-6">
-  <div class="absolute inset-0 bg-gradient-to-br from-black/70 via-gray-900/60 to-transparent"></div>
-  <div class="absolute inset-0 bg-[url('https://placehold.co/1600x1000')] bg-cover bg-center animate-[parallax_20s_linear_infinite]"></div>
-  
-  <div class="relative z-10 max-w-3xl">
-    <h1 class="text-5xl lg:text-7xl font-extrabold text-white tracking-tight mb-6 animate-fadeInDown">Ei, Vanderray!</h1>
-    <p class="text-xl lg:text-2xl text-gray-200 mb-8 animate-fadeInUp">Seu canal direto de comunicação com o vereador do povo</p>
-    <a href="#contact-form" class="px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white text-lg font-bold rounded-full shadow-xl hover:scale-105 transition-transform">
-      Envie sua demanda agora!
-    </a>
-  </div>
-</section>
-
+    <nav x-data="{ open: false, isSticky: false }" class="fixed w-full z-50 transition-all duration-300 ease-in-out"
+        @scroll.window="isSticky = (window.pageYOffset > 50)">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center transition-all duration-300"
+            :class="{ 'bg-white shadow-lg': isSticky, 'bg-transparent': !isSticky }">
+            <a href="#home" class="text-xl font-bold text-gray-800 transition-colors duration-300" :class="{ 'text-primary-dark': isSticky }">
+                Vanderray
+            </a>
+            <div class="md:hidden">
+                <button @click="open = !open" type="button" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600">
+                    <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current">
+                        <path x-show="!open" fill-rule="evenodd" d="M4 5h16a1 1 0 010 2H4a1 1 0 110-2zm0 6h16a1 1 0 010 2H4a1 1 0 110-2zm0 6h16a1 1 0 010 2H4a1 1 0 110-2z"></path>
+                        <path x-show="open" fill-rule="evenodd" d="M18.278 16.864a1 1 0 01-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 01-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 011.414-1.414l4.829 4.828 4.828-4.828a1 1 0 111.414 1.414l-4.828 4.829 4.828 4.828z"></path>
+                    </svg>
+                </button>
+            </div>
+            <div :class="{ 'flex': open, 'hidden': !open }" class="md:flex flex-col md:flex-row md:items-center md:space-x-8 absolute md:static top-16 right-6 bg-white md:bg-transparent p-4 md:p-0 rounded-lg shadow-lg md:shadow-none transition-transform duration-300">
+                <a href="#about" class="block py-2 text-gray-700 hover:text-primary transition font-medium">Quem é Vanderray</a>
+                <a href="#projects" class="block py-2 text-gray-700 hover:text-primary transition font-medium">Projetos</a>
+                <a href="#contact" class="block py-2 text-gray-700 hover:text-primary transition font-medium">Canal Direto</a>
+                <a href="#gallery" class="block py-2 text-gray-700 hover:text-primary transition font-medium">Galeria</a>
+                <a href="#news" class="block py-2 text-gray-700 hover:text-primary transition font-medium">Notícias</a>
+                <a href="#contact-form" class="mt-2 md:mt-0 px-6 py-3 bg-primary text-white font-semibold rounded-full hover:bg-primary-dark transition-colors transform hover:scale-105">Envie sua demanda</a>
+            </div>
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main>
-        <!-- Hero Section -->
-        <section id="home" class="relative w-full h-screen flex items-center justify-center text-center px-6" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://placehold.co/1200x800/111827/ffffff?text=Ananindeua') center/cover no-repeat;">
-            <div class="flex flex-col items-center">
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-white mb-4 animate-fadeInDown">Ei, Vanderray!</h1>
-                <p class="text-lg sm:text-xl lg:text-2xl text-white font-medium mb-8 animate-fadeInDown" style="animation-delay: 0.3s">Seu canal direto de comunicação com o vereador do povo</p>
-                <a href="#contact-form" class="px-8 py-4 bg-primary text-white text-lg font-bold rounded-full shadow-lg hover:bg-secondary transition-transform transform hover:scale-105 animate-fadeIn" style="animation-delay: 0.6s">Envie sua demanda agora!</a>
+        <section id="home" class="relative w-full h-screen flex items-center justify-center text-center px-6 overflow-hidden">
+            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://placehold.co/1200x800/111827/ffffff?text=Ananindeua');"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+            <div class="relative z-10 flex flex-col items-center">
+                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight text-white mb-4 animate-fade-in">Ei, Vanderray!</h1>
+                <p class="text-lg sm:text-xl lg:text-2xl text-white font-light mb-8 max-w-2xl animate-fade-in-up" style="animation-delay: 0.5s">
+                    Seu canal direto de comunicação com o vereador que transforma o que ouve nas ruas em ações concretas para Ananindeua.
+                </p>
+                <a href="#contact-form" class="px-8 py-4 bg-primary text-white text-lg font-bold rounded-full shadow-lg hover:bg-primary-dark transition-transform transform hover:scale-105 animate-fade-in-up" style="animation-delay: 0.8s">
+                    Envie sua demanda agora!
+                </a>
             </div>
         </section>
 
-        <!-- About Section -->
-        <section id="about" class="bg-white py-16 px-6 hidden-section">
+        <section id="about" class="bg-white py-20 px-6 hidden-section texture-pattern">
             <div class="container mx-auto">
-                <h2 class="section-title text-3xl font-bold text-center mb-12">Quem é Vanderray</h2>
-                <div class="flex flex-col md:flex-row items-center md:space-x-12">
-                    <div class="md:w-1/2 mb-8 md:mb-0">
-                        <img src="https://placehold.co/500x500/F3F4F6/111827?text=Foto+de+Vanderray" alt="Vanderray - o vereador do povo" class="rounded-3xl shadow-lg w-full h-auto">
+                <h2 class="section-title text-3xl font-bold text-center mx-auto">Quem é Vanderray</h2>
+                <div class="flex flex-col md:flex-row items-center md:space-x-12 mt-12">
+                    <div class="md:w-1/2 mb-8 md:mb-0 animate-fade-in-up">
+                        <img src="https://placehold.co/500x500/F3F4F6/111827?text=Foto+de+Vanderray" alt="Vanderray - o vereador do povo" class="rounded-3xl shadow-2xl w-full h-auto">
                     </div>
-                    <div class="md:w-1/2 text-center md:text-left">
-                        <h3 class="text-2xl font-bold mb-4">💬 O amigo da comunidade</h3>
-                        <p class="text-gray-700 mb-6">Minha trajetória política é fruto de uma vida dedicada a ouvir e servir as pessoas. Nascido e criado em Ananindeua, conheço de perto as necessidades e os desafios do nosso povo. Minha missão é ser a voz da comunidade na Câmara, transformando o que ouço nas ruas em ações concretas para o bem de todos.</p>
-                        <ul class="space-y-3 text-left max-w-lg mx-auto md:mx-0">
-                            <li class="flex items-start text-gray-700"><span class="mr-2">💡</span><span>Compromisso com a transparência e a honestidade.</span></li>
-                            <li class="flex items-start text-gray-700"><span class="mr-2">🤝</span><span>Fortalecimento das lideranças comunitárias.</span></li>
-                            <li class="flex items-start text-gray-700"><span class="mr-2">✊</span><span>Luta por mais infraestrutura e serviços básicos.</span></li>
-                            <li class="flex items-start text-gray-700"><span class="mr-2">🗣️</span><span>Diálogo constante e aberto com a população.</span></li>
+                    <div class="md:w-1/2 text-center md:text-left animate-fade-in-up" style="animation-delay: 0.3s">
+                        <h3 class="text-2xl font-bold mb-4">O amigo da comunidade</h3>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            Minha trajetória política é fruto de uma vida dedicada a ouvir e servir as pessoas. Nascido e criado em Ananindeua, conheço de perto as necessidades e os desafios do nosso povo. Minha missão é ser a voz da comunidade na Câmara, transformando o que ouço nas ruas em ações concretas para o bem de todos.
+                        </p>
+                        <ul class="space-y-3 text-left text-gray-700 max-w-lg mx-auto md:mx-0 font-medium">
+                            <li class="flex items-start">
+                                <span class="mr-2 text-primary">💡</span>
+                                <span class="flex-1">Compromisso com a transparência e a honestidade.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2 text-primary">🤝</span>
+                                <span class="flex-1">Fortalecimento das lideranças comunitárias.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2 text-primary">✊</span>
+                                <span class="flex-1">Luta por mais infraestrutura e serviços básicos.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2 text-primary">🗣️</span>
+                                <span class="flex-1">Diálogo constante e aberto com a população.</span>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Projects Section -->
-        <section id="projects" class="bg-gray-soft py-16 px-6 hidden-section">
+        <section id="projects" class="bg-gray-soft py-20 px-6 hidden-section texture-pattern">
             <div class="container mx-auto">
-                <h2 class="section-title text-3xl font-bold text-center mb-12">Nossos Projetos</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Project Card: Cesta na Mesa -->
-                    <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center transition-transform duration-300 card-hover">
+                <h2 class="section-title text-3xl font-bold text-center mx-auto">Nossos Projetos</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center transition-transform duration-300 card-hover card-gradient animate-fade-in-up">
                         <div class="bg-primary text-white p-4 rounded-full mb-4">
                             <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zM5.293 8.293a1 1 0 011.414 0L10 11.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
                         </div>
-                        <h3 class="text-xl font-semibold mb-2">Cesta na Mesa</h3>
-                        <p class="text-gray-600 mb-4">Combate à insegurança alimentar. Levamos alimentos frescos e nutritivos diretamente para as famílias em situação de vulnerabilidade.</p>
-                        <a href="#" class="text-primary hover:underline font-semibold">Saiba mais</a>
+                        <h3 class="text-2xl font-semibold mb-2">Cesta na Mesa</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            Combate à insegurança alimentar. Levamos alimentos frescos e nutritivos diretamente para as famílias em situação de vulnerabilidade.
+                        </p>
+                        <a href="#" class="text-primary hover:text-primary-dark font-semibold transition hover:underline">Saiba mais</a>
                     </div>
-                    <!-- Project Card: Gás em Casa -->
-                    <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center transition-transform duration-300 card-hover">
+                    <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center transition-transform duration-300 card-hover card-gradient animate-fade-in-up" style="animation-delay: 0.3s">
                         <div class="bg-primary text-white p-4 rounded-full mb-4">
                             <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 012 0v2a1 1 0 11-2 0V9zm4 0a1 1 0 012 0v2a1 1 0 11-2 0V9zm-2-5a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
                         </div>
-                        <h3 class="text-xl font-semibold mb-2">Gás em Casa</h3>
-                        <p class="text-gray-600 mb-4">Facilitamos a compra de gás de cozinha, um item essencial, a preços mais justos, aliviando o orçamento das famílias.</p>
-                        <a href="#" class="text-primary hover:underline font-semibold">Saiba mais</a>
+                        <h3 class="text-2xl font-semibold mb-2">Gás em Casa</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            Facilitamos a compra de gás de cozinha, um item essencial, a preços mais justos, aliviando o orçamento das famílias.
+                        </p>
+                        <a href="#" class="text-primary hover:text-primary-dark font-semibold transition hover:underline">Saiba mais</a>
                     </div>
-                    <!-- Project Card: Equipe Vanderray em Ação! -->
-                    <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center transition-transform duration-300 card-hover">
+                    <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center transition-transform duration-300 card-hover card-gradient animate-fade-in-up" style="animation-delay: 0.6s">
                         <div class="bg-primary text-white p-4 rounded-full mb-4">
                             <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zM9 11a1 1 0 112 0v2a1 1 0 11-2 0v-2zm1-5a1 1 0 100-2 1 1 0 000 2z"></path></svg>
                         </div>
-                        <h3 class="text-xl font-semibold mb-2">Equipe Vanderray em Ação!</h3>
-                        <p class="text-gray-600 mb-4">Nossa equipe está sempre nas ruas, ouvindo a comunidade e fiscalizando as demandas para que sejam resolvidas.</p>
-                        <a href="#" class="text-primary hover:underline font-semibold">Saiba mais</a>
+                        <h3 class="text-2xl font-semibold mb-2">Equipe Vanderray em Ação!</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            Nossa equipe está sempre nas ruas, ouvindo a comunidade e fiscalizando as demandas para que sejam resolvidas.
+                        </p>
+                        <a href="#" class="text-primary hover:text-primary-dark font-semibold transition hover:underline">Saiba mais</a>
                     </div>
                 </div>
-                <div class="text-center mt-12">
-                    <a href="#" class="px-6 py-3 bg-secondary text-white font-semibold rounded-full hover:bg-primary transition-colors">Ver todos os projetos</a>
+                <div class="text-center mt-16 animate-fade-in" style="animation-delay: 0.8s">
+                    <a href="#" class="px-8 py-4 bg-primary-dark text-white font-semibold rounded-full hover:bg-primary transition-colors transform hover:scale-105">Ver todos os projetos</a>
                 </div>
             </div>
         </section>
 
-        <!-- Instagram Feed Section -->
-        <section id="gallery" class="bg-white py-16 px-6 hidden-section">
+        <section id="gallery" class="bg-white py-20 px-6 hidden-section">
             <div class="container mx-auto text-center">
-                <h2 class="section-title text-3xl font-bold mb-12">Galeria</h2>
-                <p class="text-gray-700 mb-8">Confira as últimas publicações do Instagram de Vanderray. Siga para acompanhar de perto as ações e o dia a dia!</p>
-                <div class="bg-gray-soft p-6 md:p-12 rounded-xl shadow-lg">
+                <h2 class="section-title text-3xl font-bold mx-auto">Galeria</h2>
+                <p class="text-gray-700 mb-12 max-w-2xl mx-auto">
+                    Confira as últimas publicações do Instagram de Vanderray. Siga para acompanhar de perto as ações e o dia a dia!
+                </p>
+                <div class="bg-gray-soft p-6 md:p-12 rounded-xl shadow-lg animate-fade-in-up">
                     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        <!-- Placeholder for Instagram Posts -->
                         <div class="relative group aspect-w-1 aspect-h-1 overflow-hidden rounded-lg">
-                            <img src="https://placehold.co/400x400/D1D5DB/4B5563?text=Post+1" alt="Instagram Post 1" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                            <img src="https://placehold.co/400x400/D1D5DB/4B5563?text=Post+1" alt="Instagram Post 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <a href="https://www.instagram.com/vanderray/" target="_blank" class="text-white font-bold text-lg">Ver Post</a>
+                                <a href="https://www.instagram.com/vanderray/" target="_blank" class="text-white font-bold text-lg hover:underline">Ver Post</a>
                             </div>
                         </div>
                         <div class="relative group aspect-w-1 aspect-h-1 overflow-hidden rounded-lg">
-                             <img src="https://placehold.co/400x400/D1D5DB/4B5563?text=Post+2" alt="Instagram Post 2" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
-                             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <a href="https://www.instagram.com/vanderray/" target="_blank" class="text-white font-bold text-lg">Ver Post</a>
-                            </div>
-                        </div>
-                         <div class="relative group aspect-w-1 aspect-h-1 overflow-hidden rounded-lg">
-                            <img src="https://placehold.co/400x400/D1D5DB/4B5563?text=Post+3" alt="Instagram Post 3" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                            <img src="https://placehold.co/400x400/D1D5DB/4B5563?text=Post+2" alt="Instagram Post 2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <a href="https://www.instagram.com/vanderray/" target="_blank" class="text-white font-bold text-lg">Ver Post</a>
+                                <a href="https://www.instagram.com/vanderray/" target="_blank" class="text-white font-bold text-lg hover:underline">Ver Post</a>
                             </div>
                         </div>
                         <div class="relative group aspect-w-1 aspect-h-1 overflow-hidden rounded-lg">
-                            <img src="https://placehold.co/400x400/D1D5DB/4B5563?text=Post+4" alt="Instagram Post 4" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                            <img src="https://placehold.co/400x400/D1D5DB/4B5563?text=Post+3" alt="Instagram Post 3" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <a href="https://www.instagram.com/vanderray/" target="_blank" class="text-white font-bold text-lg">Ver Post</a>
+                                <a href="https://www.instagram.com/vanderray/" target="_blank" class="text-white font-bold text-lg hover:underline">Ver Post</a>
                             </div>
                         </div>
                         <div class="relative group aspect-w-1 aspect-h-1 overflow-hidden rounded-lg">
-                            <img src="https://placehold.co/400x400/D1D5DB/4B5563?text=Post+5" alt="Instagram Post 5" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                            <img src="https://placehold.co/400x400/D1D5DB/4B5563?text=Post+4" alt="Instagram Post 4" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <a href="https://www.instagram.com/vanderray/" target="_blank" class="text-white font-bold text-lg">Ver Post</a>
-                            </div>
-                        </div>
-                        <div class="relative group aspect-w-1 aspect-h-1 overflow-hidden rounded-lg">
-                            <img src="https://placehold.co/400x400/D1D5DB/4B5563?text=Post+6" alt="Instagram Post 6" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
-                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <a href="https://www.instagram.com/vanderray/" target="_blank" class="text-white font-bold text-lg">Ver Post</a>
-                            </div>
-                        </div>
-                        <div class="relative group aspect-w-1 aspect-h-1 overflow-hidden rounded-lg">
-                            <img src="https://placehold.co/400x400/D1D5DB/4B5563?text=Post+7" alt="Instagram Post 7" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
-                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <a href="https://www.instagram.com/vanderray/" target="_blank" class="text-white font-bold text-lg">Ver Post</a>
-                            </div>
-                        </div>
-                        <div class="relative group aspect-w-1 aspect-h-1 overflow-hidden rounded-lg">
-                            <img src="https://placehold.co/400x400/D1D5DB/4B5563?text=Post+8" alt="Instagram Post 8" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
-                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <a href="https://www.instagram.com/vanderray/" target="_blank" class="text-white font-bold text-lg">Ver Post</a>
+                                <a href="https://www.instagram.com/vanderray/" target="_blank" class="text-white font-bold text-lg hover:underline">Ver Post</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="mt-8 text-center">
-                    <a href="https://www.instagram.com/vanderray/" target="_blank" class="inline-flex items-center space-x-2 px-6 py-3 bg-pink-500 text-white font-semibold rounded-full hover:bg-pink-600 transition-colors">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M7.5 2h9a5.5 5.5 0 015.5 5.5v9a5.5 5.5 0 01-5.5 5.5h-9A5.5 5.5 0 012 16.5v-9A5.5 5.5 0 017.5 2zm9 1.5a4 4 0 00-4-4h-9a4 4 0 00-4 4v9a4 4 0 004 4h9a4 4 0 004-4v-9zM12 8a4 4 0 100 8 4 4 0 000-8zm0 1.5a2.5 2.5 0 110 5 2.5 2.5 0 010-5zm6.5-4a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"></path></svg>
-                        <span>Siga no Instagram!</span>
+                <div class="mt-10 text-center animate-fade-in" style="animation-delay: 0.5s">
+                    <a href="https://www.instagram.com/vanderray/" target="_blank" class="inline-flex items-center space-x-2 px-8 py-4 bg-pink-500 text-white font-semibold rounded-full hover:bg-pink-600 transition-colors transform hover:scale-105">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M7.5 2h9a5.5 5.5 0 015.5 5.5v9a5.5 5.5 0 01-5.5 5.5h-9A5.5 5.5 0 012 16.5v-9A5.5 5.5 0 017.5 2zm9 1.5a4 4 0 00-4-4h-9a4 4 0 00-4 4v9a4 4 0 004 4h9a4 4 0 004-4v-9zM12 8a4 4 0 100 8 4 4 0 000-8zm0 1.5a2.5 2.5 0 110 5 2.5 2.5 0 010-5zm6.5-4a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"></path></svg>
+                        <span>Siga no Instagram</span>
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- News Section -->
-        <section id="news" class="bg-gray-soft py-16 px-6 hidden-section">
+        <section id="news" class="bg-gray-soft py-20 px-6 hidden-section texture-pattern">
             <div class="container mx-auto">
-                <h2 class="section-title text-3xl font-bold text-center mb-12">Últimas Notícias</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- News Card 1 -->
-                    <div class="bg-white rounded-xl shadow-lg p-6 transition-transform duration-300 card-hover">
-                        <h3 class="text-xl font-semibold mb-2">Vanderray participa de reunião sobre saneamento básico</h3>
+                <h2 class="section-title text-3xl font-bold text-center mx-auto">Últimas Notícias</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+                    <div class="bg-white rounded-xl shadow-lg p-6 transition-transform duration-300 card-hover animate-fade-in-up">
+                        <h3 class="text-xl font-semibold mb-2 leading-tight">Vanderray participa de reunião sobre saneamento básico</h3>
                         <p class="text-gray-600 text-sm mb-4">12 de Setembro de 2025</p>
-                        <p class="text-gray-700">Participei de uma importante reunião com representantes da comunidade do bairro X para discutir as demandas por saneamento básico...</p>
-                        <a href="#" class="text-primary hover:underline font-semibold mt-4 block">Ler mais</a>
+                        <p class="text-gray-700 leading-relaxed">
+                            Participei de uma importante reunião com representantes da comunidade do bairro X para discutir as demandas por saneamento básico...
+                        </p>
+                        <a href="#" class="text-primary hover:underline font-semibold mt-4 block">Ler mais →</a>
                     </div>
-                    <!-- News Card 2 -->
-                    <div class="bg-white rounded-xl shadow-lg p-6 transition-transform duration-300 card-hover">
-                        <h3 class="text-xl font-semibold mb-2">Lançamento do Projeto "Vanderray nas Escolas"</h3>
+                    <div class="bg-white rounded-xl shadow-lg p-6 transition-transform duration-300 card-hover animate-fade-in-up" style="animation-delay: 0.3s">
+                        <h3 class="text-xl font-semibold mb-2 leading-tight">Lançamento do Projeto "Vanderray nas Escolas"</h3>
                         <p class="text-gray-600 text-sm mb-4">10 de Setembro de 2025</p>
-                        <p class="text-gray-700">Iniciamos hoje o projeto que leva a discussão sobre cidadania e política para os jovens de Ananindeua. Um futuro mais justo passa pela educação...</p>
-                        <a href="#" class="text-primary hover:underline font-semibold mt-4 block">Ler mais</a>
+                        <p class="text-gray-700 leading-relaxed">
+                            Iniciamos hoje o projeto que leva a discussão sobre cidadania e política para os jovens de Ananindeua. Um futuro mais justo passa pela educação...
+                        </p>
+                        <a href="#" class="text-primary hover:underline font-semibold mt-4 block">Ler mais →</a>
                     </div>
-                    <!-- News Card 3 -->
-                    <div class="bg-white rounded-xl shadow-lg p-6 transition-transform duration-300 card-hover">
-                        <h3 class="text-xl font-semibold mb-2">Visita à obra de revitalização do bairro Y</h3>
+                    <div class="bg-white rounded-xl shadow-lg p-6 transition-transform duration-300 card-hover animate-fade-in-up" style="animation-delay: 0.6s">
+                        <h3 class="text-xl font-semibold mb-2 leading-tight">Visita à obra de revitalização do bairro Y</h3>
                         <p class="text-gray-600 text-sm mb-4">08 de Setembro de 2025</p>
-                        <p class="text-gray-700">Acompanhei de perto o andamento das obras de revitalização do bairro Y e pude conversar com os moradores sobre o impacto positivo das mudanças...</p>
-                        <a href="#" class="text-primary hover:underline font-semibold mt-4 block">Ler mais</a>
+                        <p class="text-gray-700 leading-relaxed">
+                            Acompanhei de perto o andamento das obras de revitalização do bairro Y e pude conversar com os moradores sobre o impacto positivo das mudanças...
+                        </p>
+                        <a href="#" class="text-primary hover:underline font-semibold mt-4 block">Ler mais →</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="bg-white py-16 px-6 hidden-section">
+        <section id="contact" class="bg-white py-20 px-6 hidden-section">
             <div class="container mx-auto">
-                <h2 class="section-title text-3xl font-bold text-center mb-12">Canal Direto</h2>
-                <p class="text-center text-gray-700 mb-8">Sua voz é o nosso guia. Use o formulário abaixo para enviar sua demanda, sugestão ou feedback. Estamos prontos para te ouvir!</p>
+                <h2 class="section-title text-3xl font-bold text-center mx-auto">Canal Direto</h2>
+                <p class="text-center text-gray-700 mb-12 max-w-2xl mx-auto">
+                    Sua voz é o nosso guia. Use o formulário abaixo para enviar sua demanda, sugestão ou feedback. Estamos prontos para te ouvir!
+                </p>
                 <div class="flex flex-col md:flex-row md:space-x-12">
-                    <!-- Contact Form -->
-                    <div id="contact-form" class="bg-gray-soft p-8 rounded-xl shadow-lg w-full md:w-1/2 mb-8 md:mb-0">
+                    <div id="contact-form" class="bg-gray-soft p-8 rounded-xl shadow-lg w-full md:w-1/2 mb-8 md:mb-0 animate-fade-in-up">
+                        <h3 class="text-2xl font-bold mb-6 text-center">Envie sua mensagem</h3>
                         <form id="demand-form" class="space-y-6">
                             <div>
                                 <label for="name" class="block text-sm font-medium text-gray-700">Seu Nome</label>
@@ -379,27 +321,28 @@
                                 <label for="message" class="block text-sm font-medium text-gray-700">Sua Mensagem</label>
                                 <textarea id="message" name="message" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary px-3 py-2"></textarea>
                             </div>
-                            <button type="submit" class="w-full px-4 py-2 bg-primary text-white font-semibold rounded-full hover:bg-secondary transition-colors">Enviar Demanda</button>
+                            <button type="submit" class="w-full px-4 py-3 bg-primary text-white font-semibold rounded-full hover:bg-primary-dark transition-colors transform hover:scale-105">
+                                Enviar Demanda
+                            </button>
                         </form>
                         <div id="success-message" class="hidden mt-6 p-4 bg-green-100 text-green-700 rounded-lg text-center font-semibold">
                             Sua mensagem foi enviada com sucesso! Agradecemos o seu contato e vamos te dar um retorno em breve.
                         </div>
                     </div>
 
-                    <!-- Map and Social Media -->
-                    <div class="w-full md:w-1/2 space-y-8">
+                    <div class="w-full md:w-1/2 space-y-12 animate-fade-in-up" style="animation-delay: 0.3s">
                         <div>
-                            <h3 class="text-2xl font-bold mb-4">💬 Conecte-se conosco!</h3>
+                            <h3 class="text-2xl font-bold mb-4">Conecte-se conosco!</h3>
                             <div class="flex flex-wrap gap-4">
-                                <a href="https://wa.me/5591900000000" target="_blank" class="flex items-center space-x-2 bg-green-500 text-white px-4 py-2 rounded-full font-semibold hover:bg-green-600 transition-colors">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2C6.54 2 2 6.54 2 12.04c0 1.79.48 3.5.34 4.79l-1.38 5.09c-.06.2.03.42.22.51.19.09.4.04.53-.1l4.98-3.04c1.2.3 2.47.45 3.77.45 5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2zm2.06 13.93c-.15.25-.92.2-.92.2s-.75-.38-.98-.67c-.24-.31-.25-.32-.44-.32-.2 0-.4-.1-.58-.1-.18 0-.32.09-.4.2-.08.11-.26.29-.44.5-.18.21-.36.21-.55.1s-.41-.18-.8-.48c-.4-.3-.8-.74-1.12-1.15-.32-.43-.72-.94-1.02-1.46-.3-.52-.61-1.07-.44-1.23.18-.17.38-.28.49-.4s.22-.32.3-.47c.09-.15.09-.28 0-.42-.08-.14-.4-.36-.57-.55-.17-.19-.3-.21-.4-.2-.1 0-.2.02-.33.06-.12.04-.26.1-.4.21-.14.12-.27.28-.42.44-.15.15-.28.27-.4.36-.12.09-.23.1-.35.12-.11.02-.2-.01-.32-.07-.12-.05-.28-.15-.43-.3-.15-.14-.29-.27-.4-.41-.12-.15-.1-.28-.02-.4-.06-.18.1-1.68.14-1.77.04-.09.34-.3.44-.38.1-.08.2-.14.3-.2-.06-.05-.14-.14-.14-.23-.08-.09-.22-.26-.35-.4s-.17-.2-.26-.3c-.09-.1-.18-.2-.25-.32-.08-.12-.13-.24-.13-.37-.01-.13.06-.27.14-.4s.19-.24.3-.34c.1-.1.21-.19.33-.25.13-.06.2-.07.31-.07h.45c.18 0 .42.06.63.15.21.09.39.21.57.34.18.14.36.29.5.42.15.14.28.26.4.37.11.12.23.23.32.32.09.09.2.14.32.14.12 0 .22-.05.31-.14.1-.09.2-.21.28-.31.08-.1.14-.19.2-.29.05-.1.1-.19.14-.27.05-.08.08-.15.09-.24.01-.08-.02-.17-.05-.25-.03-.08-.06-.16-.08-.24-.02-.08-.03-.17-.03-.26 0-.17.06-.32.14-.42.08-.1.17-.15.26-.18s.22-.04.35-.04c.12 0 .28.02.43.07.15.05.3.1.43.16.14.07.27.15.39.23.12.08.25.17.38.25.13.08.26.16.39.24.13.08.26.15.39.21.13.07.25.12.36.17.1.04.18.06.26.06h.04c.13 0 .24-.04.34-.13.1-.1.2-.22.28-.35.08-.13.13-.27.13-.42 0-.15-.05-.3-.13-.44-.08-.14-.2-.27-.35-.4-.15-.14-.3-.26-.45-.37-.15-.11-.3-.2-.45-.28-.15-.09-.29-.14-.42-.14-.13 0-.25.04-.37.12-.12.08-.2.18-.28.3-.08.12-.13.26-.13.43 0 .15.05.3.14.45.09.15.22.28.36.4.14.12.29.23.44.33.15.1.3.18.45.24.15.07.3.1.45.1.16-.01.32-.05.45-.14.13-.09.25-.21.36-.36.11-.15.2-.33.26-.54.06-.2.1-.42.1-.64 0-.4-.1-.7-.3-.89-.2-.2-.5-.3-.9-.3h-.02c-.39 0-.74.14-1.04.42-.3.28-.52.62-.68 1.02-.16.4-.24.84-.24 1.29 0 .44.08.88.24 1.28.16.4.38.74.68 1.02.3.28.65.42 1.04.42.39 0 .74-.14 1.04-.42.3-.28.52-.62.68-1.02.16-.4.24-.84.24-1.28 0-.4-.1-.7-.3-.89-.2-.2-.5-.3-.9-.3h-.02c-.39 0-.74.14-1.04.42-.3.28-.52.62-.68 1.02-.16.4-.24-.84-.24-1.28 0-.39-.08-.74-.24-1.04-.16-.3-.38-.52-.68-.68-.3-.16-.65-.24-1.04-.24z"></path></svg>
+                                <a href="https://wa.me/5591900000000" target="_blank" class="flex items-center space-x-2 bg-green-500 text-white px-5 py-2 rounded-full font-semibold hover:bg-green-600 transition-colors transform hover:scale-105">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2C6.54 2 2 6.54 2 12.04c0 1.79.48 3.5.34 4.79l-1.38 5.09c-.06.2.03.42.22.51.19.09.4.04.53-.1l4.98-3.04c1.2.3 2.47.45 3.77.45 5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2zm2.06 13.93c-.15.25-.92.2-.92.2s-.75-.38-.98-.67c-.24-.31-.25-.32-.44-.32-.2 0-.4-.1-.58-.1-.18 0-.32.09-.4.2-.08.11-.26.29-.44.5-.18.21-.36.21-.55.1s-.41-.18-.8-.48c-.4-.3-.8-.74-1.12-1.15-.32-.43-.72-.94-1.02-1.46-.3-.52-.61-1.07-.44-1.23.18-.17.38-.28.49-.4s.22-.32.3-.47c.09-.15.09-.28 0-.42-.08-.14-.4-.36-.57-.55-.17-.19-.3-.21-.4-.2-.1 0-.2.02-.33.06-.12.04-.26.1-.4.21-.14.12-.27.28-.42.44-.15.15-.28.27-.4.36-.12.09-.23.1-.35.12-.11.02-.2-.01-.32-.07-.12-.05-.28-.15-.43-.3-.15-.14-.29-.27-.4-.41-.12-.15-.1-.28-.02-.4-.06-.18.1-1.68.14-1.77.04-.09.34-.3.44-.38.1-.08.2-.14.3-.2-.06-.05-.14-.14-.14-.23-.08-.09-.22-.26-.35-.4s-.17-.2-.26-.3c-.09-.1-.18-.2-.25-.32-.08-.12-.13-.24-.13-.37-.01-.13.06-.27.14-.4s.19-.24.3-.34c.1-.1.21-.19.33-.25.13-.06.2-.07.31-.07h.45c.18 0 .42.06.63.15.21.09.39.21.57.34.18.14.36.29.5.42.15.14.28.26.4.37.11.12.23.23.32.32.09.09.2.14.32.14.12 0 .22-.05.31-.14.1-.09.2-.21.28-.31.08-.1.14-.19.2-.29.05-.1.1-.19.14-.27.05-.08.08-.15.09-.24.01-.08-.02-.17-.05-.25-.03-.08-.06-.16-.08-.24-.02-.08-.03-.17-.03-.26 0-.17.06-.32.14-.42.08-.1.17-.15.26-.18s.22-.04.35-.04c.12 0 .28.02.43.07.15.05.3.1.43.16.14.07.27.15.39.23.12.08.25.17.38.25.13.08.26.16.39.24.13.08.26.15.39.21.13.07.25.12.36.17.1.04.18.06.26.06h.04c.13 0 .24-.04.34-.13.1-.1.2-.22.28-.35.08-.13.13-.27.13-.42 0-.15-.05-.3-.13-.44-.08-.14-.2-.27-.35-.4-.15-.14-.3-.26-.45-.37-.15-.11-.3-.2-.45-.28-.15-.09-.29-.14-.42-.14-.13 0-.25.04-.37.12-.12.08-.2.18-.28.3-.08.12-.13.26-.13.43 0 .15.05.3.14.45.09.15.22.28.36.4.14.12.29.23.44.33.15.1.3.18.45.24.15.07.3.1.45.1.16-.01.32-.05.45-.14.13-.09.25-.21.36-.36.11-.15.2-.33.26-.54.06-.2.1-.42.1-.64 0-.4-.1-.7-.3-.89-.2-.2-.5-.3-.9-.3h-.02c-.39 0-.74.14-1.04.42-.3.28-.52.62-.68 1.02-.16.4-.24.84-.24 1.29 0 .44.08.88.24 1.28.16.4.38.74.68 1.02.3.28.65.42 1.04.42.39 0 .74-.14 1.04-.42.3-.28.52-.62.68-1.02.16-.4.24-.84.24-1.28 0-.39-.08-.74-.24-1.04-.16-.3-.38-.52-.68-.68-.3-.16-.65-.24-1.04-.24z"></path></svg>
                                     <span>WhatsApp</span>
                                 </a>
-                                <a href="https://www.facebook.com/" target="_blank" class="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-full font-semibold hover:bg-blue-700 transition-colors">
+                                <a href="https://www.facebook.com/" target="_blank" class="flex items-center space-x-2 bg-blue-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-blue-700 transition-colors transform hover:scale-105">
                                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 5.084 3.708 9.24 8.545 9.998v-7.034h-2.54v-2.966h2.54V9.276c0-2.502 1.492-3.88 3.777-3.88 1.094 0 2.24.195 2.24.195v2.454h-1.26c-1.248 0-1.666.776-1.666 1.579v1.948h2.775l-.445 2.966h-2.33V22.002C18.292 21.24 22 17.084 22 12c0-5.523-4.477-10-10-10z"></path></svg>
                                     <span>Facebook</span>
                                 </a>
-                                <a href="https://www.instagram.com/" target="_blank" class="flex items-center space-x-2 bg-pink-500 text-white px-4 py-2 rounded-full font-semibold hover:bg-pink-600 transition-colors">
+                                <a href="https://www.instagram.com/" target="_blank" class="flex items-center space-x-2 bg-pink-500 text-white px-5 py-2 rounded-full font-semibold hover:bg-pink-600 transition-colors transform hover:scale-105">
                                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M7.5 2h9a5.5 5.5 0 015.5 5.5v9a5.5 5.5 0 01-5.5 5.5h-9A5.5 5.5 0 012 16.5v-9A5.5 5.5 0 017.5 2zm9 1.5a4 4 0 00-4-4h-9a4 4 0 00-4 4v9a4 4 0 004 4h9a4 4 0 004-4v-9zM12 8a4 4 0 100 8 4 4 0 000-8zm0 1.5a2.5 2.5 0 110 5 2.5 2.5 0 010-5zm6.5-4a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"></path></svg>
                                     <span>Instagram</span>
                                 </a>
@@ -407,7 +350,9 @@
                         </div>
                         <div>
                             <h3 class="text-2xl font-bold mb-4">Mapa de Atuação</h3>
-                            <img src="https://placehold.co/600x350/F3F4F6/111827?text=Mapa+de+Ananindeua" alt="Mapa de atuação em Ananindeua" class="rounded-lg shadow-md w-full h-auto">
+                            <div class="relative w-full aspect-w-16 aspect-h-9">
+                                <img src="https://placehold.co/600x350/F3F4F6/111827?text=Mapa+de+Ananindeua" alt="Mapa de atuação em Ananindeua" class="rounded-lg shadow-md w-full h-auto">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -415,69 +360,31 @@
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-black text-white py-8 px-6">
+    <footer class="bg-black text-gray-300 py-12 px-6">
         <div class="container mx-auto text-center md:flex md:justify-between md:items-center">
-            <p>&copy; 2025 Ei, Vanderray! Todos os direitos reservados.</p>
-            <div class="flex justify-center md:justify-end space-x-4 mt-4 md:mt-0">
-                <a href="#about" class="hover:text-primary transition">Sobre</a>
-                <a href="#projects" class="hover:text-primary transition">Projetos</a>
-                <a href="#contact" class="hover:text-primary transition">Contato</a>
+            <p class="text-sm">&copy; 2025 Vanderray. Todos os direitos reservados.</p>
+            <div class="flex justify-center md:justify-end space-x-6 mt-6 md:mt-0">
+                <a href="#about" class="hover:text-primary transition font-medium">Sobre</a>
+                <a href="#projects" class="hover:text-primary transition font-medium">Projetos</a>
+                <a href="#contact" class="hover:text-primary transition font-medium">Contato</a>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const menuButton = document.getElementById('menu-button');
-            const navMenu = document.getElementById('nav-menu');
-            const navLinks = document.querySelectorAll('#nav-menu a');
-            const demandForm = document.getElementById('demand-form');
-            const successMessage = document.getElementById('success-message');
+            // Intersection Observer para animação de seções
             const sections = document.querySelectorAll('.hidden-section');
-
-            // Toggle mobile menu
-            menuButton.addEventListener('click', () => {
-                navMenu.classList.toggle('hidden');
-                navMenu.classList.toggle('flex');
-            });
-
-            // Hide menu on link click (for mobile)
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (navMenu.classList.contains('flex')) {
-                        navMenu.classList.remove('flex');
-                        navMenu.classList.add('hidden');
-                    }
-                });
-            });
-
-            // Handle form submission
-            demandForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                console.log("Formulário enviado. Dados: ", {
-                    name: document.getElementById('name').value,
-                    neighborhood: document.getElementById('neighborhood').value,
-                    phone: document.getElementById('phone').value,
-                    message: document.getElementById('message').value
-                });
-                
-                successMessage.classList.remove('hidden');
-                demandForm.reset(); 
-            });
-
-            // Intersection Observer for section animations
             const observerOptions = {
                 root: null,
                 rootMargin: '0px',
-                threshold: 0.1
+                threshold: 0.2
             };
-
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible-section');
+                        entry.target.classList.remove('hidden-section');
                         observer.unobserve(entry.target);
                     }
                 });
@@ -485,6 +392,19 @@
 
             sections.forEach(section => {
                 observer.observe(section);
+            });
+
+            // Lidar com o envio do formulário (simulado)
+            const demandForm = document.getElementById('demand-form');
+            const successMessage = document.getElementById('success-message');
+            demandForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                // Simula o envio
+                setTimeout(() => {
+                    demandForm.reset();
+                    successMessage.classList.remove('hidden');
+                    successMessage.classList.add('animate-fadeIn');
+                }, 500);
             });
         });
     </script>
