@@ -1,431 +1,825 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vanderray | A voz do povo de Ananindeua</title>
-
+    <title>Vanderray Lima da Silva | Vereador de Ananindeua - PSDB</title>
+    <meta name="description" content="Vanderray Lima da Silva - Vereador de Ananindeua pelo PSDB. Trabalhando por Saúde, Educação e Infraestrutura para o nosso município do Pará.">
+    
+    <!-- Preload critical resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <style>
-        :root {
-            scroll-behavior: smooth;
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'serif': ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        },
+                        accent: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-in-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'bounce-gentle': 'bounceGentle 2s infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        bounceGentle: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        }
+                    }
+                }
+            }
         }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            color: #111827; /* Preto grafite */
-            position: relative;
-        }
-
-        /* Textura sutil e elegante: pontilhada */
-        .texture-pattern::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Cpath fill='%23111827' d='M0 0h1v1H0zm2 2h1v1H2z' fill-opacity='.05'/%3E%3C/svg%3E");
-        }
-
-        /* Custom Colors for Tailwind */
-        .bg-primary { background-color: #F97316; }
-        .bg-primary-dark { background-color: #EA580C; }
-        .bg-gray-soft { background-color: #F3F4F6; }
-        .text-primary { color: #F97316; }
-        .text-primary-dark { color: #EA580C; }
-
-        /* Estilo para títulos de seção */
-        .section-title {
-            position: relative;
-            padding-bottom: 1.5rem;
-            margin-bottom: 2rem;
-            display: inline-block;
-        }
-        .section-title::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            bottom: 0;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: #F97316;
-            border-radius: 9999px;
-        }
-
-        /* Animações aprimoradas */
-        .animate-fade-in-up {
-            animation: fadeInUp 1s ease-out forwards;
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in {
-            animation: fadeIn 1.2s ease-out forwards;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* Card animation on hover */
-        .card-hover:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
-
-        /* Smooth scroll for sections */
-        .hidden-section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .visible-section {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Efeito de gradiente em cards para profundidade */
-        .card-gradient {
-            background-image: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%);
-        }
-
-        /* Adiciona um efeito de parallax e cor escura na seção de contato */
-        .parallax-bg {
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
-        .dark-overlay {
-            background-color: rgba(0, 0, 0, 0.6);
-        }
-    </style>
+    </script>
 </head>
-<body class="bg-white">
+<body class="font-sans text-gray-900 bg-gradient-to-br from-orange-50 via-white to-blue-50 overflow-x-hidden">
+    
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="fixed inset-0 bg-white z-50 flex items-center justify-center">
+        <div class="text-center">
+            <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-primary-600 mx-auto mb-4"></div>
+            <p class="text-primary-600 font-semibold">Carregando...</p>
+        </div>
+    </div>
 
-    <!-- Navbar -->
-    <nav x-data="{ open: false, isSticky: false }" class="fixed w-full z-50 transition-all duration-300 ease-in-out"
-        @scroll.window="isSticky = (window.pageYOffset > 50)">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center transition-all duration-300"
-            :class="{ 'bg-white shadow-lg': isSticky, 'bg-transparent': !isSticky }">
-            <!-- Logo no topo -->
-            <a href="#home" class="transition-colors duration-300">
-                <img src="https://placehold.co/150x50/F97316/ffffff?text=LOGO+TOPO" alt="Logo Vanderray" class="h-8 md:h-10">
-            </a>
-            <div class="md:hidden">
-                <button @click="open = !open" type="button" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600">
-                    <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current">
-                        <path x-show="!open" fill-rule="evenodd" d="M4 5h16a1 1 0 010 2H4a1 1 0 110-2zm0 6h16a1 1 0 010 2H4a1 1 0 110-2zm0 6h16a1 1 0 010 2H4a1 1 0 110-2z"></path>
-                        <path x-show="open" fill-rule="evenodd" d="M18.278 16.864a1 1 0 01-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 01-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 011.414-1.414l4.829 4.828 4.828-4.828a1 1 0 111.414 1.414l-4.828 4.829 4.828 4.828z"></path>
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#home" class="flex-shrink-0 group">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+                            <span class="text-white font-bold text-xl">V</span>
+                        </div>
+                        <div>
+                            <h1 class="font-bold text-xl text-gray-900 group-hover:text-primary-600 transition-colors">VANDERRAY</h1>
+                            <p class="text-sm text-gray-600 -mt-1">Vereador Ananindeua</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200">Início</a>
+                    <a href="#historia" class="nav-link text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200">História</a>
+                    <a href="#atuacao" class="nav-link text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200">Atuação</a>
+                    <a href="#noticias" class="nav-link text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200">Notícias</a>
+                    <a href="#contato" class="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white px-6 py-2.5 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                        Contato
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-gray-700 hover:text-primary-600 hover:bg-gray-100 transition-colors duration-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
             </div>
-            <div :class="{ 'flex': open, 'hidden': !open }" class="md:flex flex-col md:flex-row md:items-center md:space-x-8 absolute md:static top-16 right-6 bg-white md:bg-transparent p-4 md:p-0 rounded-lg shadow-lg md:shadow-none transition-transform duration-300">
-                <a href="#about" class="block py-2 text-gray-700 hover:text-primary transition font-medium">Quem é Vanderray</a>
-                <a href="#projects" class="block py-2 text-gray-700 hover:text-primary transition font-medium">Projetos</a>
-                <a href="#contact" class="block py-2 text-gray-700 hover:text-primary transition font-medium">Canal Direto</a>
-                <a href="#gallery" class="block py-2 text-gray-700 hover:text-primary transition font-medium">Galeria</a>
-                <a href="#news" class="block py-2 text-gray-700 hover:text-primary transition font-medium">Notícias</a>
-                <a href="#contact-form" class="mt-2 md:mt-0 px-6 py-3 bg-primary text-white font-semibold rounded-full hover:bg-primary-dark transition-colors transform hover:scale-105">Envie sua demanda</a>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 hidden">
+            <div class="px-4 py-4 space-y-2">
+                <a href="#home" class="block px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-lg font-medium transition-colors duration-200">Início</a>
+                <a href="#historia" class="block px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-lg font-medium transition-colors duration-200">História</a>
+                <a href="#atuacao" class="block px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-lg font-medium transition-colors duration-200">Atuação</a>
+                <a href="#noticias" class="block px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-lg font-medium transition-colors duration-200">Notícias</a>
+                <a href="#contato" class="block px-4 py-3 text-primary-600 hover:bg-primary-50 rounded-lg font-semibold transition-colors duration-200">Contato</a>
             </div>
         </div>
     </nav>
 
-    <main>
-        <section id="home" class="relative w-full h-screen flex items-center justify-center text-center px-6 overflow-hidden">
-            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://placehold.co/1200x800/111827/ffffff?text=Ananindeua');"></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
-            <div class="relative z-10 flex flex-col items-center">
-                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight text-white mb-4 animate-fade-in">Ei, Vanderray!</h1>
-                <p class="text-lg sm:text-xl lg:text-2xl text-white font-light mb-8 max-w-2xl animate-fade-in-up" style="animation-delay: 0.5s">
-                    Seu canal direto de comunicação com o vereador que transforma o que ouve nas ruas em ações concretas para Ananindeua.
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 bg-gradient-to-br from-primary-50 via-white to-accent-50"></div>
+        <div class="absolute top-20 right-10 w-72 h-72 bg-primary-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse-slow"></div>
+        <div class="absolute bottom-20 left-10 w-96 h-96 bg-accent-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse-slow" style="animation-delay: 1s;"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Content -->
+                <div class="animate-fade-in">
+                    <div class="inline-flex items-center px-4 py-2 bg-primary-100 text-primary-800 rounded-full text-sm font-semibold mb-6">
+                        <span class="w-2 h-2 bg-primary-500 rounded-full mr-2 animate-pulse"></span>
+                        Mandato 2021-2024
+                    </div>
+                    
+                    <h1 class="text-5xl lg:text-7xl font-bold text-gray-900 leading-tight mb-6">
+                        <span class="bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent">Vanderray</span>
+                        <br>
+                        <span class="text-gray-700">por</span>
+                        <span class="bg-gradient-to-r from-accent-600 to-accent-800 bg-clip-text text-transparent">Ananindeua</span>
+                    </h1>
+                    
+                    <p class="text-xl text-gray-600 mb-8 leading-relaxed max-w-2xl">
+                        A voz da população na Câmara Municipal. Trabalhando incansavelmente por 
+                        <span class="font-semibold text-primary-600">Saúde</span>, 
+                        <span class="font-semibold text-primary-600">Educação</span> e 
+                        <span class="font-semibold text-primary-600">Infraestrutura</span> 
+                        para o nosso município do Pará.
+                    </p>
+                    
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 mb-12">
+                        <a href="#contato" class="group inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                            <svg class="w-5 h-5 mr-3 group-hover:animate-bounce-gentle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                            </svg>
+                            Envie sua Sugestão
+                        </a>
+                        
+                        <a href="https://wa.me/5591900000000" target="_blank" class="group inline-flex items-center justify-center px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                            <svg class="w-5 h-5 mr-3 group-hover:animate-bounce-gentle" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.700"/>
+                            </svg>
+                            WhatsApp
+                        </a>
+                    </div>
+                    
+                    <!-- Stats -->
+                    <div class="grid grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-primary-600 mb-1">4+</div>
+                            <div class="text-sm text-gray-600">Anos de Mandato</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-primary-600 mb-1">50+</div>
+                            <div class="text-sm text-gray-600">Projetos Apresentados</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-primary-600 mb-1">100%</div>
+                            <div class="text-sm text-gray-600">Transparência</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Video/Image -->
+                <div class="animate-slide-up lg:order-2">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary-400 to-accent-400 rounded-3xl transform rotate-3 scale-105 opacity-20"></div>
+                        <div class="relative bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200">
+                            <div class="aspect-video">
+                                <iframe 
+                                    class="w-full h-full" 
+                                    src="https://www.youtube.com/embed/j_8j4g_NnQ8?si=M3x1iG8v7OQ-H-80" 
+                                    title="Vanderray - Vereador de Ananindeua" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen
+                                    loading="lazy">
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce-gentle">
+            <div class="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
+                <div class="w-1 h-3 bg-gray-400 rounded-full mt-2 animate-pulse"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="historia" class="py-20 bg-white relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-accent-500"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                    Quem é <span class="bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent">Vanderray?</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Uma trajetória dedicada ao serviço público e ao desenvolvimento de Ananindeua
                 </p>
-                <a href="#contact-form" class="px-8 py-4 bg-primary text-white text-lg font-bold rounded-full shadow-lg hover:bg-primary-dark transition-transform transform hover:scale-105 animate-fade-in-up" style="animation-delay: 0.8s">
-                    Envie sua demanda agora!
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <!-- Content -->
+                <div class="space-y-8">
+                    <div class="bg-gradient-to-br from-primary-50 to-accent-50 p-8 rounded-3xl border border-primary-100">
+                        <div class="flex items-start space-x-4 mb-6">
+                            <div class="w-12 h-12 bg-primary-500 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-2">Origem e Formação</h3>
+                                <p class="text-gray-700 leading-relaxed">
+                                    Nascido em <strong>Tucuruí, Pará, em 16 de julho de 1980</strong>, Vanderray Lima da Silva escolheu Ananindeua para construir sua vida e carreira. Com uma sólida formação acadêmica e profissional, sempre manteve o compromisso com o desenvolvimento social e econômico da região.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-accent-50 to-primary-50 p-8 rounded-3xl border border-accent-100">
+                        <div class="flex items-start space-x-4 mb-6">
+                            <div class="w-12 h-12 bg-accent-500 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-2">Trajetória Política</h3>
+                                <p class="text-gray-700 leading-relaxed">
+                                    Eleito vereador pelo <strong>PSDB</strong> com uma plataforma focada na transparência e resultados concretos para a população. Sua atuação na Câmara Municipal é marcada pela defesa incansável dos direitos dos cidadãos e pela fiscalização rigorosa do poder executivo.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-gray-50 to-gray-100 p-8 rounded-3xl border border-gray-200">
+                        <div class="flex items-start space-x-4 mb-6">
+                            <div class="w-12 h-12 bg-gray-700 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-2">Compromisso com Ananindeua</h3>
+                                <p class="text-gray-700 leading-relaxed">
+                                    Com profundo conhecimento das necessidades do município, trabalha diariamente para propor leis que realmente transformam a vida dos cidadãos, sempre priorizando a <strong>transparência, eficiência e participação popular</strong> na gestão pública.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Image/Visual -->
+                <div class="relative">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary-200 to-accent-200 rounded-3xl transform -rotate-3 scale-105 opacity-30"></div>
+                    <div class="relative bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200 p-8">
+                        <div class="text-center">
+                            <div class="w-32 h-32 bg-gradient-to-br from-primary-500 to-accent-500 rounded-full mx-auto mb-6 flex items-center justify-center shadow-lg">
+                                <span class="text-4xl font-bold text-white">VL</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">Vanderray Lima da Silva</h3>
+                            <p class="text-primary-600 font-semibold mb-4">Vereador de Ananindeua - PSDB</p>
+                            <div class="space-y-3 text-left">
+                                <div class="flex items-center text-gray-700">
+                                    <svg class="w-5 h-5 text-primary-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                    </svg>
+                                    <span>Nascido em 16/07/1980</span>
+                                </div>
+                                <div class="flex items-center text-gray-700">
+                                    <svg class="w-5 h-5 text-primary-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                    </svg>
+                                    <span>Natural de Tucuruí, PA</span>
+                                </div>
+                                <div class="flex items-center text-gray-700">
+                                    <svg class="w-5 h-5 text-primary-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                                    </svg>
+                                    <span>Residente em Ananindeua</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
+
+    <!-- Areas de Atuação -->
+    <section id="atuacao" class="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-500 to-primary-500"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                    Nossas Principais <span class="bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">Bandeiras</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Trabalhando diariamente por melhorias concretas em áreas essenciais para o desenvolvimento de Ananindeua
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Saúde -->
+                <div class="group bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 animate-on-scroll stagger-animation">
+                    <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-pink-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary-600 transition-colors">Saúde Pública</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Luta por melhorias nos postos de saúde, mais médicos especialistas, insumos adequados e um atendimento humanizado para todos os cidadãos de Ananindeua.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center text-sm text-gray-500">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Fiscalização de UBS
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Projetos de Lei
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Educação -->
+                <div class="group bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 animate-on-scroll stagger-animation">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C20.832 18.477 19.246 18 17.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary-600 transition-colors">Educação de Qualidade</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Apoio à valorização dos professores, investimentos em tecnologia educacional e melhoria da infraestrutura escolar no município.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center text-sm text-gray-500">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Valorização Docente
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Tecnologia nas Escolas
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Infraestrutura -->
+                <div class="group bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 animate-on-scroll stagger-animation">
+                    <div class="w-16 h-16 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary-600 transition-colors">Infraestrutura</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Cobrança por melhorias em ruas, saneamento básico, iluminação pública e mobilidade urbana nos bairros de Ananindeua.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center text-sm text-gray-500">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Pavimentação
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Saneamento
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Transparência -->
+                <div class="group bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 animate-on-scroll stagger-animation">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary-600 transition-colors">Transparência</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Compromisso com o uso correto do dinheiro público e acompanhamento rigoroso das ações da Prefeitura de Ananindeua.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center text-sm text-gray-500">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Fiscalização Ativa
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Prestação de Contas
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Notícias e Ações -->
+    <section id="noticias" class="py-20 bg-white relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-accent-500"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                    Últimas <span class="bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">Notícias</span> e Ações
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Acompanhe as principais atividades, projetos e conquistas do mandato
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Notícia 1 -->
+                <article class="group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 overflow-hidden animate-on-scroll stagger-animation">
+                    <div class="aspect-video bg-gradient-to-br from-primary-400 to-accent-400 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
+                            <svg class="w-16 h-16 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            15 de Setembro, 2024
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors">
+                            Aprovação de Projeto para Melhorias na Saúde
+                        </h3>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            Projeto de lei que garante maior transparência nos gastos com saúde pública foi aprovado por unanimidade na Câmara Municipal.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                Aprovado
+                            </span>
+                            <a href="#" class="text-primary-600 hover:text-primary-700 font-semibold text-sm transition-colors">
+                                Leia mais →
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Notícia 2 -->
+                <article class="group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 overflow-hidden animate-on-scroll stagger-animation">
+                    <div class="aspect-video bg-gradient-to-br from-blue-400 to-indigo-400 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
+                            <svg class="w-16 h-16 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            10 de Setembro, 2024
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors">
+                            Audiência Pública sobre Educação
+                        </h3>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            Realizada audiência pública para discutir melhorias na infraestrutura escolar e valorização dos professores municipais.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                Realizado
+                            </span>
+                            <a href="#" class="text-primary-600 hover:text-primary-700 font-semibold text-sm transition-colors">
+                                Leia mais →
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Notícia 3 -->
+                <article class="group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 overflow-hidden animate-on-scroll stagger-animation">
+                    <div class="aspect-video bg-gradient-to-br from-yellow-400 to-orange-400 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
+                            <svg class="w-16 h-16 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            5 de Setembro, 2024
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors">
+                            Fiscalização de Obras Públicas
+                        </h3>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            Visita técnica às obras de pavimentação nos bairros para acompanhar o andamento e qualidade dos serviços prestados.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                Em Andamento
+                            </span>
+                            <a href="#" class="text-primary-600 hover:text-primary-700 font-semibold text-sm transition-colors">
+                                Leia mais →
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            
+            <div class="text-center mt-12 animate-on-scroll">
+                <a href="#" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+                    </svg>
+                    Ver Todas as Notícias
                 </a>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="about" class="bg-white py-20 px-6 hidden-section texture-pattern">
-            <div class="container mx-auto">
-                <h2 class="section-title text-3xl font-bold text-center mx-auto">Quem é Vanderray</h2>
-                <div class="flex flex-col md:flex-row items-center md:space-x-12 mt-12">
-                    <div class="md:w-1/2 mb-8 md:mb-0 animate-fade-in-up">
-                        <img src="https://placehold.co/500x500/F3F4F6/111827?text=Foto+de+Vanderray" alt="Vanderray - o vereador do povo" class="rounded-3xl shadow-2xl w-full h-auto">
-                    </div>
-                    <div class="md:w-1/2 text-center md:text-left animate-fade-in-up" style="animation-delay: 0.3s">
-                        <h3 class="text-2xl font-bold mb-4">O amigo da comunidade</h3>
-                        <p class="text-gray-700 leading-relaxed mb-6">
-                            Minha trajetória política é fruto de uma vida dedicada a ouvir e servir as pessoas. Nascido e criado em Ananindeua, conheço de perto as necessidades e os desafios do nosso povo. Minha missão é ser a voz da comunidade na Câmara, transformando o que ouço nas ruas em ações concretas para o bem de todos.
-                        </p>
-                        <ul class="space-y-3 text-left text-gray-700 max-w-lg mx-auto md:mx-0 font-medium">
-                            <li class="flex items-start">
-                                <span class="mr-2 text-primary">💡</span>
-                                <span class="flex-1">Compromisso com a transparência e a honestidade.</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-2 text-primary">🤝</span>
-                                <span class="flex-1">Fortalecimento das lideranças comunitárias.</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-2 text-primary">✊</span>
-                                <span class="flex-1">Luta por mais infraestrutura e serviços básicos.</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-2 text-primary">🗣️</span>
-                                <span class="flex-1">Diálogo constante e aberto com a população.</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects" class="bg-gray-soft py-20 px-6 hidden-section texture-pattern">
-            <div class="container mx-auto">
-                <h2 class="section-title text-3xl font-bold text-center mx-auto">Nossos Projetos</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                    <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center transition-transform duration-300 card-hover card-gradient animate-fade-in-up">
-                        <div class="bg-primary text-white p-4 rounded-full mb-4">
-                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zM5.293 8.293a1 1 0 011.414 0L10 11.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
-                        </div>
-                        <h3 class="text-2xl font-semibold mb-2">Cesta na Mesa</h3>
-                        <p class="text-gray-600 mb-6 leading-relaxed">
-                            Combate à insegurança alimentar. Levamos alimentos frescos e nutritivos diretamente para as famílias em situação de vulnerabilidade.
-                        </p>
-                        <a href="#" class="text-primary hover:text-primary-dark font-semibold transition hover:underline">Saiba mais</a>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center transition-transform duration-300 card-hover card-gradient animate-fade-in-up" style="animation-delay: 0.3s">
-                        <div class="bg-primary text-white p-4 rounded-full mb-4">
-                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 012 0v2a1 1 0 11-2 0V9zm4 0a1 1 0 012 0v2a1 1 0 11-2 0V9zm-2-5a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
-                        </div>
-                        <h3 class="text-2xl font-semibold mb-2">Gás em Casa</h3>
-                        <p class="text-gray-600 mb-6 leading-relaxed">
-                            Facilitamos a compra de gás de cozinha, um item essencial, a preços mais justos, aliviando o orçamento das famílias.
-                        </p>
-                        <a href="#" class="text-primary hover:text-primary-dark font-semibold transition hover:underline">Saiba mais</a>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center transition-transform duration-300 card-hover card-gradient animate-fade-in-up" style="animation-delay: 0.6s">
-                        <div class="bg-primary text-white p-4 rounded-full mb-4">
-                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zM9 11a1 1 0 112 0v2a1 1 0 11-2 0v-2zm1-5a1 1 0 100-2 1 1 0 000 2z"></path></svg>
-                        </div>
-                        <h3 class="text-2xl font-semibold mb-2">Equipe Vanderray em Ação!</h3>
-                        <p class="text-gray-600 mb-6 leading-relaxed">
-                            Nossa equipe está sempre nas ruas, ouvindo a comunidade e fiscalizando as demandas para que sejam resolvidas.
-                        </p>
-                        <a href="#" class="text-primary hover:underline font-semibold mt-4 block">Saiba mais</a>
-                    </div>
-                </div>
-                <div class="text-center mt-16 animate-fade-in" style="animation-delay: 0.8s">
-                    <a href="#" class="px-8 py-4 bg-primary-dark text-white font-semibold rounded-full hover:bg-primary transition-colors transform hover:scale-105">Ver todos os projetos</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="gallery" class="bg-white py-20 px-6 hidden-section">
-            <div class="container mx-auto text-center">
-                <h2 class="section-title text-3xl font-bold mx-auto">Galeria</h2>
-                <p class="text-gray-700 mb-12 max-w-2xl mx-auto">
-                    Confira as últimas publicações do Instagram de Vanderray. Siga para acompanhar de perto as ações e o dia a dia!
+    <!-- Contato -->
+    <section id="contato" class="py-20 bg-gradient-to-br from-primary-50 via-white to-accent-50 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-500 to-primary-500"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                    Entre em <span class="bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">Contato</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Sua opinião é fundamental para nosso trabalho. Envie suas sugestões, críticas ou denúncias
                 </p>
-                <div class="bg-gray-soft p-6 md:p-12 rounded-xl shadow-lg animate-fade-in-up">
-                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        <div class="relative group aspect-w-1 aspect-h-1 overflow-hidden rounded-lg">
-                            <img src="https://placehold.co/400x400/D1D5DB/4B5563?text=Post+1" alt="Instagram Post 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <a href="https://www.instagram.com/vanderray/" target="_blank" class="text-white font-bold text-lg hover:underline">Ver Post</a>
-                            </div>
-                        </div>
-                        <div class="relative group aspect-w-1 aspect-h-1 overflow-hidden rounded-lg">
-                            <img src="https://placehold.co/400x400/D1D5DB/4B5563?text=Post+2" alt="Instagram Post 2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <a href="https://www.instagram.com/vanderray/" target="_blank" class="text-white font-bold text-lg hover:underline">Ver Post</a>
-                            </div>
-                        </div>
-                        <div class="relative group aspect-w-1 aspect-h-1 overflow-hidden rounded-lg">
-                            <img src="https://placehold.co/400x400/D1D5DB/4B5563?text=Post+3" alt="Instagram Post 3" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <a href="https://www.instagram.com/vanderray/" target="_blank" class="text-white font-bold text-lg hover:underline">Ver Post</a>
-                            </div>
-                        </div>
-                        <div class="relative group aspect-w-1 aspect-h-1 overflow-hidden rounded-lg">
-                            <img src="https://placehold.co/400x400/D1D5DB/4B5563?text=Post+4" alt="Instagram Post 4" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <a href="https://www.instagram.com/vanderray/" target="_blank" class="text-white font-bold text-lg hover:underline">Ver Post</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-10 text-center animate-fade-in" style="animation-delay: 0.5s">
-                    <a href="https://www.instagram.com/vanderray/" target="_blank" class="inline-flex items-center space-x-2 px-8 py-4 bg-pink-500 text-white font-semibold rounded-full hover:bg-pink-600 transition-colors transform hover:scale-105">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M7.5 2h9a5.5 5.5 0 015.5 5.5v9a5.5 5.5 0 01-5.5 5.5h-9A5.5 5.5 0 012 16.5v-9A5.5 5.5 0 017.5 2zm9 1.5a4 4 0 00-4-4h-9a4 4 0 00-4 4v9a4 4 0 004 4h9a4 4 0 004-4v-9zM12 8a4 4 0 100 8 4 4 0 000-8zm0 1.5a2.5 2.5 0 110 5 2.5 2.5 0 010-5zm6.5-4a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"></path></svg>
-                        <span>Siga no Instagram</span>
-                    </a>
-                </div>
             </div>
-        </section>
-
-        <section id="news" class="bg-gray-soft py-20 px-6 hidden-section texture-pattern">
-            <div class="container mx-auto">
-                <h2 class="section-title text-3xl font-bold text-center mx-auto">Últimas Notícias</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-                    <div class="bg-white rounded-xl shadow-lg p-6 transition-transform duration-300 card-hover animate-fade-in-up">
-                        <h3 class="text-xl font-semibold mb-2 leading-tight">Vanderray participa de reunião sobre saneamento básico</h3>
-                        <p class="text-gray-600 text-sm mb-4">12 de Setembro de 2025</p>
-                        <p class="text-gray-700 leading-relaxed">
-                            Participei de uma importante reunião com representantes da comunidade do bairro X para discutir as demandas por saneamento básico...
-                        </p>
-                        <a href="#" class="text-primary hover:underline font-semibold mt-4 block">Ler mais →</a>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-lg p-6 transition-transform duration-300 card-hover animate-fade-in-up" style="animation-delay: 0.3s">
-                        <h3 class="text-xl font-semibold mb-2 leading-tight">Lançamento do Projeto "Vanderray nas Escolas"</h3>
-                        <p class="text-gray-600 text-sm mb-4">10 de Setembro de 2025</p>
-                        <p class="text-gray-700 leading-relaxed">
-                            Iniciamos hoje o projeto que leva a discussão sobre cidadania e política para os jovens de Ananindeua. Um futuro mais justo passa pela educação...
-                        </p>
-                        <a href="#" class="text-primary hover:underline font-semibold mt-4 block">Ler mais →</a>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-lg p-6 transition-transform duration-300 card-hover animate-fade-in-up" style="animation-delay: 0.6s">
-                        <h3 class="text-xl font-semibold mb-2 leading-tight">Visita à obra de revitalização do bairro Y</h3>
-                        <p class="text-gray-600 text-sm mb-4">08 de Setembro de 2025</p>
-                        <p class="text-gray-700 leading-relaxed">
-                            Acompanhei de perto o andamento das obras de revitalização do bairro Y e pude conversar com os moradores sobre o impacto positivo das mudanças...
-                        </p>
-                        <a href="#" class="text-primary hover:underline font-semibold mt-4 block">Ler mais →</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Seção de Contato com Imagem de Fundo -->
-        <section id="contact" class="relative py-20 px-6 hidden-section parallax-bg" style="background-image: url('https://placehold.co/1200x800/F97316/ffffff?text=Fundo+Laranja');">
-            <div class="absolute inset-0 dark-overlay"></div>
-            <div class="container mx-auto relative z-10">
-                <h2 class="section-title text-3xl font-bold text-center mx-auto text-white">Canal Direto</h2>
-                <p class="text-center text-gray-200 mb-12 max-w-2xl mx-auto">
-                    Sua voz é o nosso guia. Use o formulário abaixo para enviar sua demanda, sugestão ou feedback. Estamos prontos para te ouvir!
-                </p>
-                <div class="flex flex-col md:flex-row md:space-x-12">
-                    <div id="contact-form" class="bg-gray-soft p-8 rounded-xl shadow-lg w-full md:w-1/2 mb-8 md:mb-0 animate-fade-in-up">
-                        <h3 class="text-2xl font-bold mb-6 text-center">Envie sua mensagem</h3>
-                        <form id="demand-form" class="space-y-6">
-                            <div>
-                                <label for="name" class="block text-sm font-medium text-gray-700">Seu Nome</label>
-                                <input type="text" id="name" name="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary h-12 px-3">
+            
+            <div class="grid lg:grid-cols-2 gap-16 items-start">
+                <!-- Formulário -->
+                <div class="animate-on-scroll">
+                    <div class="bg-white p-8 rounded-3xl shadow-xl border border-gray-100">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Envie sua Mensagem</h3>
+                        
+                        <form class="space-y-6" id="contact-form">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="nome" class="block text-sm font-semibold text-gray-700 mb-2">Nome Completo</label>
+                                    <input type="text" id="nome" name="nome" required 
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200"
+                                           placeholder="Seu nome completo">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">E-mail</label>
+                                    <input type="email" id="email" name="email" required 
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200"
+                                           placeholder="seu@email.com">
+                                </div>
                             </div>
-                            <div>
-                                <label for="neighborhood" class="block text-sm font-medium text-gray-700">Seu Bairro</label>
-                                <input type="text" id="neighborhood" name="neighborhood" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary h-12 px-3">
+                            
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="telefone" class="block text-sm font-semibold text-gray-700 mb-2">Telefone</label>
+                                    <input type="tel" id="telefone" name="telefone" 
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200"
+                                           placeholder="(91) 99999-9999">
+                                </div>
+                                <div>
+                                    <label for="assunto" class="block text-sm font-semibold text-gray-700 mb-2">Assunto</label>
+                                    <select id="assunto" name="assunto" required 
+                                            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200">
+                                        <option value="">Selecione um assunto</option>
+                                        <option value="saude">Saúde</option>
+                                        <option value="educacao">Educação</option>
+                                        <option value="infraestrutura">Infraestrutura</option>
+                                        <option value="transparencia">Transparência</option>
+                                        <option value="outros">Outros</option>
+                                    </select>
+                                </div>
                             </div>
+                            
                             <div>
-                                <label for="phone" class="block text-sm font-medium text-gray-700">Telefone (WhatsApp)</label>
-                                <input type="tel" id="phone" name="phone" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary h-12 px-3">
+                                <label for="mensagem" class="block text-sm font-semibold text-gray-700 mb-2">Mensagem</label>
+                                <textarea id="mensagem" name="mensagem" rows="6" required 
+                                          class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 resize-none"
+                                          placeholder="Descreva sua sugestão, crítica ou denúncia..."></textarea>
                             </div>
-                            <div>
-                                <label for="message" class="block text-sm font-medium text-gray-700">Sua Mensagem</label>
-                                <textarea id="message" name="message" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary px-3 py-2"></textarea>
-                            </div>
-                            <button type="submit" class="w-full px-4 py-3 bg-primary text-white font-semibold rounded-full hover:bg-primary-dark transition-colors transform hover:scale-105">
-                                Enviar Demanda
+                            
+                            <button type="submit" 
+                                    class="w-full bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white font-semibold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center">
+                                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                                </svg>
+                                Enviar Mensagem
                             </button>
                         </form>
-                        <div id="success-message" class="hidden mt-6 p-4 bg-green-100 text-green-700 rounded-lg text-center font-semibold">
-                            Sua mensagem foi enviada com sucesso! Agradecemos o seu contato e vamos te dar um retorno em breve.
+                    </div>
+                </div>
+                
+                <!-- Informações de Contato -->
+                <div class="space-y-8 animate-on-scroll">
+                    <!-- Endereço -->
+                    <div class="bg-white p-8 rounded-3xl shadow-xl border border-gray-100">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-500 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Câmara Municipal</h3>
+                                <p class="text-gray-600 leading-relaxed">
+                                    Câmara Municipal de Ananindeua<br>
+                                    Ananindeua, Pará<br>
+                                    Brasil
+                                </p>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="w-full md:w-1/2 space-y-12 animate-fade-in-up" style="animation-delay: 0.3s">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-4 text-white">Conecte-se conosco!</h3>
-                            <div class="flex flex-wrap gap-4">
-                                <a href="https://wa.me/5591900000000" target="_blank" class="flex items-center space-x-2 bg-green-500 text-white px-5 py-2 rounded-full font-semibold hover:bg-green-600 transition-colors transform hover:scale-105">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2C6.54 2 2 6.54 2 12.04c0 1.79.48 3.5.34 4.79l-1.38 5.09c-.06.2.03.42.22.51.19.09.4.04.53-.1l4.98-3.04c1.2.3 2.47.45 3.77.45 5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2zm2.06 13.93c-.15.25-.92.2-.92.2s-.75-.38-.98-.67c-.24-.31-.25-.32-.44-.32-.2 0-.4-.1-.58-.1-.18 0-.32.09-.4.2-.08.11-.26.29-.44.5-.18.21-.36.21-.55.1s-.41-.18-.8-.48c-.4-.3-.8-.74-1.12-1.15-.32-.43-.72-.94-1.02-1.46-.3-.52-.61-1.07-.44-1.23.18-.17.38-.28.49-.4s.22-.32.3-.47c.09-.15.09-.28 0-.42-.08-.14-.4-.36-.57-.55-.17-.19-.3-.21-.4-.2-.1 0-.2.02-.33.06-.12.04-.26.1-.4.21-.14.12-.27.28-.42.44-.15.15-.28.27-.4.36-.12.09-.23.1-.35.12-.11.02-.2-.01-.32-.07-.12-.05-.28-.15-.43-.3-.15-.14-.29-.27-.4-.41-.12-.15-.1-.28-.02-.4-.06-.18.1-1.68.14-1.77.04-.09.34-.3.44-.38.1-.08.2-.14.3-.2-.06-.05-.14-.14-.14-.23-.08-.09-.22-.26-.35-.4s-.17-.2-.26-.3c-.09-.1-.18-.2-.25-.32-.08-.12-.13-.24-.13-.37-.01-.13.06-.27.14-.4s.19-.24.3-.34c.1-.1.21-.19.33-.25.13-.06.2-.07.31-.07h.45c.18 0 .42.06.63.15.21.09.39.21.57.34.18.14.36.29.5.42.15.14.28.26.4.37.11.12.23.23.32.32.09.09.2.14.32.14.12 0 .22-.05.31-.14.1-.09.2-.21.28-.31.08-.1.14-.19.2-.29.05-.1.1-.19.14-.27.05-.08.08-.15.09-.24.01-.08-.02-.17-.05-.25-.03-.08-.06-.16-.08-.24-.02-.08-.03-.17-.03-.26 0-.17.06-.32.14-.42.08-.1.17-.15.26-.18s.22-.04.35-.04c.12 0 .28.02.43.07.15.05.3.1.43.16.14.07.27.15.39.23.12.08.25.17.38.25.13.08.26.16.39.24.13.08.26.15.39.21.13.07.25.12.36.17.1.04.18.06.26.06h.04c.13 0 .24-.04.34-.13.1-.1.2-.22.28-.35.08-.13.13-.27.13-.42 0-.15-.05-.3-.13-.44-.08-.14-.2-.27-.35-.4-.15-.14-.3-.26-.45-.37-.15-.11-.3-.2-.45-.28-.15-.09-.29-.14-.42-.14-.13 0-.25.04-.37.12-.12.08-.2.18-.28.3-.08.12-.13.26-.13.43 0 .15.05.3.14.45.09.15.22.28.36.4.14.12.29.23.44.33.15.1.3.18.45.24.15.07.3.1.45.1.16-.01.32-.05.45-.14.13-.09.25-.21.36-.36.11-.15.2-.33.26-.54.06-.2.1-.42.1-.64 0-.4-.1-.7-.3-.89-.2-.2-.5-.3-.9-.3h-.02c-.39 0-.74.14-1.04.42-.3.28-.52.62-.68 1.02-.16.4-.24.84-.24 1.29 0 .44.08.88.24 1.28.16.4.38.74.68 1.02.3.28.65.42 1.04.42.39 0 .74-.14 1.04-.42.3-.28.52-.62.68-1.02.16-.4.24-.84.24-1.28 0-.39-.08-.74-.24-1.04-.16-.3-.38-.52-.68-.68-.3-.16-.65-.24-1.04-.24z"></path></svg>
-                                    <span>WhatsApp</span>
-                                </a>
-                                <a href="https://www.facebook.com/" target="_blank" class="flex items-center space-x-2 bg-blue-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-blue-700 transition-colors transform hover:scale-105">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 5.084 3.708 9.24 8.545 9.998v-7.034h-2.54v-2.966h2.54V9.276c0-2.502 1.492-3.88 3.777-3.88 1.094 0 2.24.195 2.24.195v2.454h-1.26c-1.248 0-1.666.776-1.666 1.579v1.948h2.775l-.445 2.966h-2.33V22.002C18.292 21.24 22 17.084 22 12c0-5.523-4.477-10-10-10z"></path></svg>
-                                    <span>Facebook</span>
-                                </a>
-                                <a href="https://www.instagram.com/" target="_blank" class="flex items-center space-x-2 bg-pink-500 text-white px-5 py-2 rounded-full font-semibold hover:bg-pink-600 transition-colors transform hover:scale-105">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M7.5 2h9a5.5 5.5 0 015.5 5.5v9a5.5 5.5 0 01-5.5 5.5h-9A5.5 5.5 0 012 16.5v-9A5.5 5.5 0 017.5 2zm9 1.5a4 4 0 00-4-4h-9a4 4 0 00-4 4v9a4 4 0 004 4h9a4 4 0 004-4v-9zM12 8a4 4 0 100 8 4 4 0 000-8zm0 1.5a2.5 2.5 0 110 5 2.5 2.5 0 010-5zm6.5-4a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"></path></svg>
-                                    <span>Instagram</span>
+                    
+                    <!-- WhatsApp -->
+                    <div class="bg-white p-8 rounded-3xl shadow-xl border border-gray-100">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.700"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">WhatsApp</h3>
+                                <p class="text-gray-600 mb-3">Fale diretamente conosco</p>
+                                <a href="https://wa.me/5591900000000" target="_blank" 
+                                   class="inline-flex items-center text-green-600 hover:text-green-700 font-semibold transition-colors">
+                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.700"/>
+                                    </svg>
+                                    (91) 9 0000-0000
                                 </a>
                             </div>
                         </div>
-                        <div>
-                            <h3 class="text-2xl font-bold mb-4 text-white">Mapa de Atuação</h3>
-                            <div class="relative w-full aspect-w-16 aspect-h-9">
-                                <img src="https://placehold.co/600x350/F3F4F6/111827?text=Mapa+de+Ananindeua" alt="Mapa de atuação em Ananindeua" class="rounded-lg shadow-md w-full h-auto">
-                            </div>
+                    </div>
+                    
+                    <!-- Redes Sociais -->
+                    <div class="bg-white p-8 rounded-3xl shadow-xl border border-gray-100">
+                        <h3 class="text-xl font-bold text-gray-900 mb-6">Siga nas Redes Sociais</h3>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-12 h-12 bg-blue-600 hover:bg-blue-700 rounded-xl flex items-center justify-center transition-colors duration-200">
+                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-blue-800 hover:bg-blue-900 rounded-xl flex items-center justify-center transition-colors duration-200">
+                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-pink-600 hover:bg-pink-700 rounded-xl flex items-center justify-center transition-colors duration-200">
+                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.347-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.001z.017.017"/>
+                                </svg>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="bg-black text-gray-300 py-12 px-6">
-        <div class="container mx-auto text-center md:flex md:justify-between md:items-center">
-            <!-- Logo no rodapé -->
-            <img src="https://placehold.co/120x40/F97316/ffffff?text=LOGO+RODAPE" alt="Logo do rodapé" class="h-8 md:h-10 mx-auto md:mx-0 mb-4 md:mb-0">
-            <p class="text-sm">&copy; 2025 Vanderray. Todos os direitos reservados.</p>
-            <div class="flex justify-center md:justify-end space-x-6 mt-6 md:mt-0">
-                <a href="#about" class="hover:text-primary transition font-medium">Sobre</a>
-                <a href="#projects" class="hover:text-primary transition font-medium">Projetos</a>
-                <a href="#contact" class="hover:text-primary transition font-medium">Contato</a>
+    <footer class="bg-gray-900 text-white py-16 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <!-- Logo e Descrição -->
+                <div class="lg:col-span-2">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">V</span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-xl">VANDERRAY</h3>
+                            <p class="text-gray-400 text-sm">Vereador Ananindeua</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed mb-6 max-w-md">
+                        Trabalhando incansavelmente por Saúde, Educação e Infraestrutura para o nosso município de Ananindeua, Pará.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-primary-600 rounded-lg flex items-center justify-center transition-colors duration-200">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-primary-600 rounded-lg flex items-center justify-center transition-colors duration-200">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-primary-600 rounded-lg flex items-center justify-center transition-colors duration-200">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.347-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.001z.017.017"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Links Rápidos -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-6">Links Rápidos</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-300 hover:text-primary-400 transition-colors duration-200">Início</a></li>
+                        <li><a href="#historia" class="text-gray-300 hover:text-primary-400 transition-colors duration-200">História</a></li>
+                        <li><a href="#atuacao" class="text-gray-300 hover:text-primary-400 transition-colors duration-200">Atuação</a></li>
+                        <li><a href="#noticias" class="text-gray-300 hover:text-primary-400 transition-colors duration-200">Notícias</a></li>
+                        <li><a href="#contato" class="text-gray-300 hover:text-primary-400 transition-colors duration-200">Contato</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contato -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-6">Contato</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center text-gray-300">
+                            <svg class="w-4 h-4 mr-3 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            </svg>
+                            Ananindeua, PA
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <svg class="w-4 h-4 mr-3 text-primary-400" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.700"/>
+                            </svg>
+                            (91) 9 0000-0000
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0">
+                        © 2024 Vanderray Lima da Silva. Todos os direitos reservados.
+                    </p>
+                    <div class="flex items-center space-x-6 text-sm text-gray-400">
+                        <a href="#" class="hover:text-primary-400 transition-colors duration-200">Política de Privacidade</a>
+                        <a href="#" class="hover:text-primary-400 transition-colors duration-200">Termos de Uso</a>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Intersection Observer para animação de seções
-            const sections = document.querySelectorAll('.hidden-section');
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.2
-            };
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible-section');
-                        entry.target.classList.remove('hidden-section');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-
-            // Lidar com o envio do formulário (simulado)
-            const demandForm = document.getElementById('demand-form');
-            const successMessage = document.getElementById('success-message');
-            demandForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                // Simula o envio
-                setTimeout(() => {
-                    demandForm.reset();
-                    successMessage.classList.remove('hidden');
-                    successMessage.classList.add('animate-fadeIn');
-                }, 500);
-            });
-        });
-    </script>
-</body>
-</html>
