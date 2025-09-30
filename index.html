@@ -151,7 +151,7 @@
                 <div class="animate-fade-in">
                     <div class="inline-flex items-center px-4 py-2 bg-primary-100 text-primary-800 rounded-full text-sm font-semibold mb-6">
                         <span class="w-2 h-2 bg-primary-500 rounded-full mr-2 animate-pulse"></span>
-                        Mandato 2021-2024
+                        Mandato Atual (Terceiro Mandato!)
                     </div>
                     
                     <h1 class="text-5xl lg:text-7xl font-bold text-gray-900 leading-tight mb-6">
@@ -189,7 +189,7 @@
                     <!-- Stats -->
                     <div class="grid grid-cols-3 gap-6">
                         <div class="text-center">
-                            <div class="text-3xl font-bold text-primary-600 mb-1">4+</div>
+                            <div class="text-3xl font-bold text-primary-600 mb-1">3°</div>
                             <div class="text-sm text-gray-600">Anos de Mandato</div>
                         </div>
                         <div class="text-center">
@@ -209,15 +209,10 @@
                         <div class="absolute inset-0 bg-gradient-to-r from-primary-400 to-accent-400 rounded-3xl transform rotate-3 scale-105 opacity-20"></div>
                         <div class="relative bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200">
                             <div class="aspect-video">
-                                <iframe 
-                                    class="w-full h-full" 
-                                    src="https://www.youtube.com/embed/j_8j4g_NnQ8?si=M3x1iG8v7OQ-H-80" 
-                                    title="Vanderray - Vereador de Ananindeua" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen
-                                    loading="lazy">
-                                </iframe>
+                                <video controls class="w-full h-full" title="Vanderray - Vereador de Ananindeua" loading="lazy">
+                                    <source src="vanderray.MOV" type="video/mp4">
+                                    Seu navegador não suporta a tag de vídeo.
+                                </video>
                             </div>
                         </div>
                     </div>
@@ -338,7 +333,7 @@
     </section>
 
     <!-- JavaScript -->
-    <script src="script.js"></script>
+    <script src="script-corrigido.js"></script>
 </body>
 </html>
 
@@ -812,9 +807,12 @@
             
             <div class="border-t border-gray-800 pt-8">
                 <div class="flex flex-col md:flex-row justify-between items-center">
-                    <p class="text-gray-400 text-sm mb-4 md:mb-0">
-                        © 2024 Vanderray Lima da Silva. Todos os direitos reservados.
-                    </p>
+                    <div class="mb-4 md:mb-0">
+                        <img src="logos agrupadas.png" alt="Logos Agrupadas" class="h-10 mx-auto md:mx-0 mb-2">
+                        <p class="text-gray-400 text-sm">
+                            © 2024 Vanderray Lima da Silva. Todos os direitos reservados.
+                        </p>
+                    </div>
                     <div class="flex items-center space-x-6 text-sm text-gray-400">
                         <a href="#" class="hover:text-primary-400 transition-colors duration-200">Política de Privacidade</a>
                         <a href="#" class="hover:text-primary-400 transition-colors duration-200">Termos de Uso</a>
@@ -823,3 +821,4 @@
             </div>
         </div>
     </footer>
+
